@@ -57,6 +57,9 @@ func parseRatings(profId string) map[string]interface{} {
 								profRatings["numRatings"] = int(element.(map[string]interface{})["numRatings"].(float64))
 								profRatings["avgRating"] = element.(map[string]interface{})["avgRating"].(float64)
 
+								profRatings["firstName"] = element.(map[string]interface{})["firstName"].(string)
+								profRatings["lastName"] = element.(map[string]interface{})["lastName"].(string)
+
 								//Parse Ratings
 							} else if element.(map[string]interface{})["__typename"] == "Rating" {
 								rating := make(map[string]interface{})
