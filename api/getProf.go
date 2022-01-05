@@ -163,18 +163,16 @@ func Main(w http.ResponseWriter, r *http.Request) {
 		first := r.URL.Query().Get("first")
 		last := r.URL.Query().Get("last")
 		schoolCode := r.URL.Query().Get("schoolCode")
-		fmt.Fprintf(w, first+" "+last+" "+schoolCode)
-		// profDetails := getProf(first, last, schoolCode)
 
-		// jsonResp, err := json.Marshal(profDetails)
-		// if err != nil {
-		// 	fmt.Fprintf(w, "error")
-		// } else {
-		// 	w.Write(jsonResp)
-		// }
-	} else {
-		fmt.Fprintf(w, "post")
+		profDetails := getProf(first, last, schoolCode)
+
+		jsonResp, err := json.Marshal(profDetails)
+
+		if err != nil {
+			fmt.Fprintf(w, "error")
+		} else {
+			w.Write(jsonResp)
+		}
 	}
-
 	return
 }
