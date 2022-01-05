@@ -165,8 +165,12 @@ func start(c *gin.Context) {
 	c.JSON(200, getProf(first, last, schoolCode))
 }
 
-func main() {
-	r := gin.Default()
-	r.GET("/getProf", start)
-	r.Run()
+func Main(w http.ResponseWriter, r *http.Request) {
+
+	// rg := gin.Default()
+	// rg.GET("/getProf", start)
+	// rg.Run()
+	profDetails := getProf("yuan", "tian", "U2Nob29sLTE0NjY")
+	fmt.Println(profDetails)
+	fmt.Fprintf(w, "hi")
 }
