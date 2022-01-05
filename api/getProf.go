@@ -8,7 +8,6 @@ import (
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/gin-gonic/gin"
 )
 
 func parseRatings(profId string) map[string]interface{} {
@@ -156,21 +155,19 @@ func getProf(first string, last string, schoolCode string) (profRatings map[stri
 	return profRatings
 }
 
-func start(c *gin.Context) {
-
-	first := c.Query("first")
-	last := c.Query("last")
-	schoolCode := c.Query("school")
-
-	c.JSON(200, getProf(first, last, schoolCode))
-}
-
 func Main(w http.ResponseWriter, r *http.Request) {
 
-	// rg := gin.Default()
-	// rg.GET("/getProf", start)
-	// rg.Run()
-	profDetails := getProf("yuan", "tian", "U2Nob29sLTE0NjY")
-	fmt.Println(profDetails)
-	fmt.Fprintf(w, "hi")
+	w.Header().Set("Content-Type", "application/json")
+
+	if r.Method == "GET" {
+		first := r.URL.Query().Get("first")
+		last := r.URL.Query().Get("last")
+		schoolCode := r.URL.Query().Get("schoolCode")
+
+		profDetails := getProf(first, last, schoolCode)
+
+		jsonResp, _ := json.Marshal(profDetails)
+		w.Write(jsonResp)
+	}
+	return
 }
