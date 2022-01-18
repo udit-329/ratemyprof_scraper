@@ -1,4 +1,4 @@
-# ratemyprof-api
+# ratemyprof scraper
 
 visit [https://ratemyprof-api.vercel.app/api/getProf](https://ratemyprof-api.vercel.app/api/getProf) to try out the scraper.
 
